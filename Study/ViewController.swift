@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var txtlbl: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,6 +23,14 @@ class ViewController: UIViewController {
         var p2 = person
         p2 = nil
         print("Reference count: \(CFGetRetainCount(person))")
+        
+        if let path = Bundle.main.path(forResource: "apikey", ofType: "plist"),
+           let dict = NSDictionary(contentsOfFile: path) as? [String: Any],
+           let apiKey = dict["APIKey"] as? String {
+            print("API Key: \(apiKey)")
+            
+            txtlbl.text = apiKey
+        }
     }
 }
 
